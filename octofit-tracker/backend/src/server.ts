@@ -10,6 +10,7 @@ import workoutsRouter from './routes/workouts';
 const app = express();
 const port = process.env.PORT ? Number(process.env.PORT) : 8000;
 
+// Codespaces-aware base URL: use the forwarded HTTPS domain when running in a Codespace, otherwise localhost.
 const codespaceName = process.env.CODESPACE_NAME;
 const baseUrl = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev`
