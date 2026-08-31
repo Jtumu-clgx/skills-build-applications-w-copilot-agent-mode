@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { fetchList } from '../api';
+import { API_ORIGIN, fetchList } from '../api';
 
 function Teams() {
   const [teams, setTeams] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchList('teams').then(setTeams).catch((err) => setError(err.message));
+    fetchList(`${API_ORIGIN}/api/teams/`).then(setTeams).catch((err) => setError(err.message));
   }, []);
 
   return (

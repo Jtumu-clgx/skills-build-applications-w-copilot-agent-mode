@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { fetchList } from '../api';
+import { API_ORIGIN, fetchList } from '../api';
 
 function Leaderboard() {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchList('leaderboard').then(setEntries).catch((err) => setError(err.message));
+    fetchList(`${API_ORIGIN}/api/leaderboard/`).then(setEntries).catch((err) => setError(err.message));
   }, []);
 
   return (

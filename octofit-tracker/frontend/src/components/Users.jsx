@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { fetchList } from '../api';
+import { API_ORIGIN, fetchList } from '../api';
 
 function Users() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchList('users').then(setUsers).catch((err) => setError(err.message));
+    fetchList(`${API_ORIGIN}/api/users/`).then(setUsers).catch((err) => setError(err.message));
   }, []);
 
   return (

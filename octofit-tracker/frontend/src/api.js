@@ -1,14 +1,14 @@
 const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
 
 // Fallback to localhost when VITE_CODESPACE_NAME is unset, avoiding https://undefined-8000... URLs.
-export const API_BASE_URL = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev/api`
-  : 'http://localhost:8000/api';
+export const API_ORIGIN = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : 'http://localhost:8000';
 
-export async function fetchList(resource) {
-  const response = await fetch(`${API_BASE_URL}/${resource}/`);
+export async function fetchList(url) {
+  const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`Failed to fetch ${resource}`);
+    throw new Error(`Failed to fetch ${url}`);
   }
   const data = await response.json();
   // Support both plain array responses and paginated { results: [...] } responses.

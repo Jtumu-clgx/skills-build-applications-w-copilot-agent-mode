@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { fetchList } from '../api';
+import { API_ORIGIN, fetchList } from '../api';
 
 function Activities() {
   const [activities, setActivities] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchList('activities').then(setActivities).catch((err) => setError(err.message));
+    fetchList(`${API_ORIGIN}/api/activities/`).then(setActivities).catch((err) => setError(err.message));
   }, []);
 
   return (
