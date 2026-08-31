@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
-import { API_ORIGIN, fetchList } from '../api';
+import { fetchList } from '../api';
+
+// Fallback to localhost when VITE_CODESPACE_NAME is unset, avoiding https://undefined-8000... URLs.
+const workoutsApiUrl = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts/`
+  : 'http://localhost:8000/api/workouts/';
 
 function Workouts() {
   const [workouts, setWorkouts] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchList(`${API_ORIGIN}/api/workouts/`).then(setWorkouts).catch((err) => setError(err.message));
+    fetchList(workoutsApiUrl).then(setWorkouts).catch((err) => setError(err.message));
   }, []);
 
   return (
